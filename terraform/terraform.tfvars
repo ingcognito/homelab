@@ -25,4 +25,4 @@ sql_replica_zone           = "us-central1-b"
 sql_pass                   = "123"
 sql_user                   = "123"
 
-lb_static_ip		   = "34.107.216.54"
+lb_static_ip = "34.107.216.54"
