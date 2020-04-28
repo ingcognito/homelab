@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports: 
+        - 8080:8080
+        - 50000:50000
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 10s
+    logging:
+      options:
+        max-size: '128m'
+        max-file: '3'
+    volumes:
+    - type: bind
+      source: $PWD/jenkins
+      target: /var/jenkins_home
+
