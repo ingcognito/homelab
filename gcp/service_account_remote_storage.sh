@@ -2,9 +2,9 @@
 set -x
 
 export SERVICE_ACCOUNT_NAME=terraform-sa
-export PROJECT_NAME=supermagicdiary
+export PROJECT_NAME=homelab-266501
 export LOCATION=us-central1
-export BUCKET_NAME=terraform-remote-state-supermagicdiary
+export BUCKET_NAME=terraform-remote-state-ingcogito
 
 # ------------------------------- CREATE SERVICE ACCOUNT
 
@@ -18,7 +18,6 @@ gcloud services enable container.googleapis.com
 gcloud iam service-accounts create ${SERVICE_ACCOUNT_NAME}
 
 #Now we can grant the necessary roles for our service account to create a GKE cluster and the associated resources:
-gcloud projects add-iam-policy-binding ${PROJECT_NAME} --member serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_NAME}.iam.gserviceaccount.com --role roles/container.admin
 gcloud projects add-iam-policy-binding ${PROJECT_NAME} --member serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_NAME}.iam.gserviceaccount.com --role roles/compute.admin
 gcloud projects add-iam-policy-binding ${PROJECT_NAME} --member serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_NAME}.iam.gserviceaccount.com --role roles/iam.serviceAccountUser
 gcloud projects add-iam-policy-binding ${PROJECT_NAME} --member serviceAccount:${SERVICE_ACCOUNT_NAME}@${PROJECT_NAME}.iam.gserviceaccount.com --role roles/resourcemanager.projectIamAdmin

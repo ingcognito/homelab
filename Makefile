@@ -55,7 +55,7 @@ teardown-production:	## Teardown production
 	docker stack rm ${PROJECT_NAME}
 
 gcp-service-account:	## Creates GCP Terraform Service account and copies key to Terraform
-	./service_account_remote_storage.sh && cp ./terraform-sa-keyfile.json
+	./gcp/service_account_remote_storage.sh && cp ./terraform-sa-keyfile.json
 
 deploy-infra:	## Creates infrastructure in GCP
 	cd terraform/ && terraform init && terraform apply
