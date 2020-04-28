@@ -1,4 +1,4 @@
-project_name          = "homelab"
+project_name          = "homelab-266501"
 app_name              = "ingcognito"
 gcp_credentials_path  = "./terraform-sa-keyfile.json"
 region                = "us-central1"
@@ -13,7 +13,7 @@ swarm_managers_instance_type = "n1-standard-4"
 managers_image_size          = 25
 swarm_workers_instance_type  = "n1-standard-2"
 workers_image_size           = 10
-swarm_workers                = "2"
+swarm_workers                = "1"
 
 sql_instance_size          = "db-f1-micro"
 sql_disk_type              = "PD_SSD"
@@ -25,4 +25,4 @@ sql_replica_zone           = "us-central1-b"
 sql_pass                   = "123"
 sql_user                   = "123"
 
-lb_static_ip		   = "0.0.0.0"
+lb_static_ip		   = "34.107.216.54"

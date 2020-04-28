@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 0.12"
   backend "gcs" {
     credentials = "./terraform-sa-keyfile.json"
-    bucket      = "terraform-remote-state-supermagicdiary"
+    bucket      = "terraform-remote-state-ingcogito"
     prefix      = "terraform/state"
   }
 }
