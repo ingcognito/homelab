@@ -47,14 +47,14 @@ resource "google_compute_backend_bucket" "ensemblecanada" {
   enable_cdn  = true
 }
 
-resource "google_compute_backend_bucket" "noahing" {
-  name        = "backend-bucket-noahing"
-  bucket_name = google_storage_bucket.static_site_noahing.name
-  enable_cdn  = true
-}
+#resource "google_compute_backend_bucket" "noahing" {
+#  name        = "backend-bucket-noahing"
+#  bucket_name = google_storage_bucket.static_site_noahing.name
+#  enable_cdn  = true
+#}
 
 resource "google_compute_backend_bucket" "ingcognito" {
-  name        = "image-backend-ingcognito"
+  name        = "backend-bucket-ingcognito"
   bucket_name = google_storage_bucket.static_site_ingcognito.name
   enable_cdn  = true
 }
@@ -81,15 +81,15 @@ resource "google_compute_url_map" "url_map" {
     default_service = google_compute_backend_bucket.ensemblecanada.self_link
   }
 
-  host_rule {
-    hosts        = ["noahing.com"]
-    path_matcher = "noahing"
-  }
-  path_matcher {
-    name            = "noahing"
-    default_service = google_compute_backend_bucket.noahing.self_link
-  }
-
+#  host_rule {
+#    hosts        = ["noahing.com"]
+#    path_matcher = "noahing"
+#  }
+#  path_matcher {
+#    name            = "noahing"
+#    default_service = google_compute_backend_bucket.noahing.self_link
+#  }
+#
   host_rule {
     hosts        = ["jenkins.ingcognito.com"]
     path_matcher = "jenkins"
