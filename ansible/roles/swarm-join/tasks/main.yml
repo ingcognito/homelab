@@ -1,0 +1,12 @@
+- name: Join Swarm Cluster as a Worker
+  become: true
+  command: docker swarm join --token {{ token }} {{ manager }}:2377
+  register: worker
+
+- name: Show Results
+  become: true
+  debug: var=worker.stdout
+
+- name: Show Errors
+  become: true
+  debug: var=worker.stderr

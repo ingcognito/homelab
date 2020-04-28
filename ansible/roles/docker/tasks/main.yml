@@ -1,0 +1,48 @@
+---
+- name: apt update
+  become: true
+  raw: apt update
+
+- name: apt use packages over HTTPS
+  become: true
+  raw: sudo apt install apt-transport-https 
+
+- name: apt use packages over ca-certifcates
+  become: true
+  raw: sudo apt install ca-certificates 
+
+- name: apt use packages over curl
+  become: true
+  raw: sudo apt install curl 
+  
+- name: apt use packages over gnupg2
+  become: true
+  raw: sudo apt install -y gnupg2 
+
+- name: apt use packages over software-properties-common
+  become: true
+  raw: sudo apt install -y software-properties-common
+
+- name: add the GPG key for the official Docker repository
+  become: true
+  raw: sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+- name: Docker repository to APT sources
+  become: true
+  raw: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+
+- name: apt update again
+  become: true
+  raw: apt update
+
+- name: install Docker
+  become: true
+  raw: sudo apt install -y docker-ce
+ 
+- name: add debian as docker user
+  become: true
+  raw: sudo usermod -aG docker ${USER}
+
+- name: chmod docker.sock
+  become: true
+  raw: chmod 666 /var/run/docker.sock

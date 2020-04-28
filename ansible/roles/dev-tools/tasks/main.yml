@@ -1,0 +1,16 @@
+- name: update
+  become: true
+  raw: apt update
+
+- name: build essentials
+  become: true
+  raw: apt install build-essential
+  
+- name: Install SSL
+  become: true
+  raw: apt install -y libssl-dev
+
+- name: Install libffi
+  become: true
+  raw: apt install -y libffi-dev
+

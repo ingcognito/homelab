@@ -1,0 +1,26 @@
+---
+- name: Install Dev Tools
+  hosts: managers:workers
+  remote_user: debian
+  gather_facts: False
+  roles:
+    - python
+    - dev-tools
+    - docker
+
+- name: Init Swarm cluster
+  hosts: managers
+  remote_user: debian
+  gather_facts: False
+  roles:
+    - swarm-init
+
+- name: Join Swarm cluster
+  hosts: workers
+  remote_user: debian
+  gather_facts: False
+  vars:
+      token: "{{ hostvars[groups['managers'][0]]['worker_token']['stdout'] }}"
+      manager: "{{ hostvars[groups['managers'][0]]['inventory_hostname'] }}"
+  roles:
+    - swarm-join

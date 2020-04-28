@@ -1,0 +1,11 @@
+- name: General Apt Update
+  become: true
+  raw: apt update
+    
+- name: Install python 3
+  become: true
+  raw: apt install -y python3-pip
+    
+- name: Install python-apt
+  become: true
+  raw: apt install -y python-apt
