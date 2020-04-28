@@ -1,1 +1,3 @@
 **/terraform-sa-keyfile.json
+**/.terraform
+ansible/inventory
