@@ -17,6 +17,12 @@ resource "google_storage_bucket" "static-site-noahing" {
   }
 }
 
+resource "google_storage_default_object_access_control" "public_rule" {
+  bucket = google_storage_bucket.static-site-noahing.name
+  role   = "READER"
+  entity = "allUsers"
+}
+
 resource "google_storage_bucket" "static-site-ensemblecanada" {
   name          = "ensemblecanada-com"
   location      = "US"
@@ -34,4 +40,11 @@ resource "google_storage_bucket" "static-site-ensemblecanada" {
     response_header = ["*"]
     max_age_seconds = 3600
   }
+}
+
+
+resource "google_storage_default_object_access_control" "public_rule" {
+  bucket = google_storage_bucket.static-site-ensemblecanada.name
+  role   = "READER"
+  entity = "allUsers"
 }
