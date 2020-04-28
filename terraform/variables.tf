@@ -37,7 +37,7 @@ variable "image_name" {
 }
 
 variable "swarm_workers" {
-  default = 2
+  default = 1
 }
 
 variable "swarm_workers_instance_type" {
