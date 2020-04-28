@@ -40,18 +40,54 @@ resource "google_compute_health_check" "healthcheck_develop" {
     port = 8080
   }
 }
-# used to route requests to a backend service based on rules that you define for the host and path of an incoming URL
+
+resource "google_compute_backend_bucket" "ensemblecanada" {
+  name        = "backend-bucket-ensemblecanada"
+  bucket_name = google_storage_bucket.static_site_ensemblecanada.name
+  enable_cdn  = true
+}
+
+resource "google_compute_backend_bucket" "noahing" {
+  name        = "backend-bucket-noahing"
+  bucket_name = google_storage_bucket.static_site_noahing.name
+  enable_cdn  = true
+}
+
+resource "google_compute_backend_bucket" "ingcognito" {
+  name        = "image-backend-ingcognito"
+  bucket_name = google_storage_bucket.static_site_ingcognito.name
+  enable_cdn  = true
+}
+
 resource "google_compute_url_map" "url_map" {
   name            = "${var.app_name}-load-balancer"
   project         = var.project_name
-  default_service = google_compute_backend_service.backend_service_jenkins.self_link
+  default_service = google_compute_backend_bucket.ingcognito.self_link
   host_rule {
     hosts        = ["ingcognito.com"]
     path_matcher = "allpaths"
   }
   path_matcher {
     name            = "allpaths"
-    default_service = google_compute_backend_service.backend_service_jenkins.self_link
+    default_service = google_compute_backend_bucket.ingcognito.self_link
+  }
+
+  host_rule {
+    hosts        = ["ensemblecanada.com"]
+    path_matcher = "ensemble"
+  }
+  path_matcher {
+    name            = "ensemble"
+    default_service = google_compute_backend_bucket.ensemblecanada.self_link
+  }
+
+  host_rule {
+    hosts        = ["noahing.com"]
+    path_matcher = "noahing"
+  }
+  path_matcher {
+    name            = "noahing"
+    default_service = google_compute_backend_bucket.noahing.self_link
   }
 
   host_rule {
