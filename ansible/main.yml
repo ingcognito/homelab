@@ -6,6 +6,7 @@
   roles:
     - python
     - dev-tools
+    - java
     - docker
 
 - name: Init Swarm cluster

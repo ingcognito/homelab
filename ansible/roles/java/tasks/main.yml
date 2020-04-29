@@ -1,0 +1,3 @@
+- name: install OpenJDK
+  become: true
+  raw: sudo apt install -y default-jre
