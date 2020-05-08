@@ -94,7 +94,7 @@ resource "google_compute_firewall" "allow-docker" {
   network = "${google_compute_network.vpc.name}"
   allow {
     protocol = "tcp"
-    ports    = ["2376", "2377", "7946", "8080"]
+    ports    = ["2376", "2377", "7946", "8080", "9001", "6969", "1337"]
   }
   allow {
     protocol = "udp"
