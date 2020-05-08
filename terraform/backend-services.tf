@@ -155,7 +155,8 @@ resource "google_compute_backend_bucket" "ingcognito" {
 resource "google_compute_url_map" "url_map" {
   name            = "${var.app_name}-load-balancer"
   project         = var.project_name
-  default_service = google_compute_backend_bucket.ingcognito.self_link
+  default_service = google_compute_backend_bucket.noahing.self_link
+
   host_rule {
     hosts        = ["ingcognito.com"]
     path_matcher = "allpaths"
