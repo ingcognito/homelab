@@ -13,3 +13,7 @@ output "loadbalancer_ip" {
 output "loadbalancer_ip_supermagicdiary" {
   value = google_compute_global_address.lb_static_ip_supermagicdiary.address
 }
+
+output "loadbalancer_ip_noahing" {
+  value = google_compute_global_address.lb_static_ip_noahing.address
+}
